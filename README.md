@@ -1,11 +1,10 @@
-# Number guessing game
+# CI SFPC
 
-Sample app to demonstrate use of FindBugs, PMD and Checkstyle.
+Sample app to demonstrate use of Surefire, FindBugs, PMD and Checkstyle.
 
-Any mistakes or horrible code are (hopefully) deliberate!
 
 To run static analysis tools:
 
 ```
-mvn clean compile findbugs:findbugs pmd:pmd checkstyle:checkstyle
+mvn clean compile test findbugs:findbugs pmd:pmd checkstyle:checkstyle
 ```
