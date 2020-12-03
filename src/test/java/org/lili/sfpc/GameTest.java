@@ -1,4 +1,4 @@
-package org.lili.fpc;
+package org.lili.sfpc;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
