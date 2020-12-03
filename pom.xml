@@ -9,10 +9,85 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.jupiter.version>5.6.2</junit.jupiter.version>
+        <assertj-core.version>3.18.1</assertj-core.version>
+        <mockito-core.version>3.6.28</mockito-core.version>
     </properties>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
     <build>
+
+        <defaultGoal>clean test findbugs:findbugs pmd:pmd checkstyle:checkstyle javancss:report jdepend:generate</defaultGoal>
+
+
         <plugins>
+
+            <!--unit test-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*$*</exclude>
+                        <exclude>**/TestUtils.java</exclude>
+                        <exclude>**/Abstract*.java</exclude>
+                        <exclude>**/BulkTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- ncss -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.1</version>
+
+                <configuration>
+                    <failOnViolation>true</failOnViolation>
+                    <ccnLimit>12</ccnLimit>
+                    <ncssLimit>90</ncssLimit>
+                </configuration>
+
+            </plugin>
+
+            <!--jdepend-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+
+            <!--compiler-->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -59,5 +134,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+                    <enableRulesSummary>false</enableRulesSummary>
+                    <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+        </plugins>
+    </reporting>
 
 </project>

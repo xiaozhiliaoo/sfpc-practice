@@ -1,7 +1,30 @@
-target/
-bin/     
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+# logback.xml
+.classpath
+.metadata/
 .project
 .settings/
-.classpath
-.idea
+.idea/
+.idea/compiler.xml
 *.iml
+*.iws
+.DS_Store
+logs/
+target/
+# Emacs
+*~
+.#*
+
+# Omni Graffle #
+*(Autosaved).graffle
+
+pom.xml.versionsBackup
+sync.sh
+
+#jRebal
+rebel.xml
