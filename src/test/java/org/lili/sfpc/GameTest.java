@@ -15,4 +15,9 @@ class GameTest {
     void run() {
         Assertions.assertTrue(true);
     }
+
+    @Test
+    void fail() {
+       // Assertions.assertTrue(false);
+    }
 }

@@ -43,7 +43,9 @@
 
     <build>
 
-        <defaultGoal>clean test findbugs:findbugs pmd:pmd checkstyle:checkstyle javancss:report jdepend:generate</defaultGoal>
+        <defaultGoal>clean test findbugs:findbugs pmd:pmd checkstyle:checkstyle javancss:report jdepend:generate
+            cobertura:cobertura
+        </defaultGoal>
 
 
         <plugins>
@@ -64,6 +66,43 @@
                         <exclude>**/BulkTest.java</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <check>
+                        <branchRate>85</branchRate>
+                        <lineRate>85</lineRate>
+                        <haltOnFailure>true</haltOnFailure>
+                        <totalBranchRate>85</totalBranchRate>
+                        <totalLineRate>85</totalLineRate>
+                        <packageLineRate>85</packageLineRate>
+                        <packageBranchRate>85</packageBranchRate>
+                        <regexes>
+                            <regex>
+                                <pattern>org.lili.sfpc.*</pattern>
+                                <branchRate>90</branchRate>
+                                <lineRate>80</lineRate>
+                            </regex>
+                            <regex>
+                                <pattern>org.lili.sfpc.*</pattern>
+                                <branchRate>40</branchRate>
+                                <lineRate>30</lineRate>
+                            </regex>
+                        </regexes>
+                    </check>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- ncss -->
@@ -166,6 +205,20 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>cobertura</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
 
         </plugins>
     </reporting>
