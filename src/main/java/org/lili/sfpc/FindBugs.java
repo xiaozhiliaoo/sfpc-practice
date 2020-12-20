@@ -1,5 +1,6 @@
 package org.lili.sfpc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,5 +15,9 @@ public class FindBugs {
         a.substring(0, 1);
         List<String> a2 = null;
         a2.size();
+        List<String> l = new ArrayList<>();
+        //java8 code
+        String s = l.stream().filter(x -> x.equals("1")).findFirst().get();
+
     }
 }
